@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import LocationInput from './components/LocationInput';
+import EventList from './components/EventList';
+import EventDetail from './components/EventDetail';
 import './App.css';
 
 function App() {
+  const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const handleLocationSubmit = (location) => {
+    //placeholder
+    setEvents([
+      { title: 'Meteor Shower', date: '2024-10-01', description: 'A spectacular meteor shower.' },
+      { title: 'Lunar Eclipse', date: '2024-10-15', description: 'A total lunar eclipse.' }
+    ]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <LocationInput onSubmit={handleLocationSubmit} />
+      <EventList events={events} />
+      {selectedEvent && <EventDetail event={selectedEvent} />}
     </div>
   );
 }
